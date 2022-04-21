@@ -12,7 +12,7 @@
 .trigger-bootstrap-feel {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   width: 197px;
   height: 31px;
