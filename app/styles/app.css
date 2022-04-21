@@ -96,7 +96,7 @@
   user-select: none;
 }
 .next-arrow {
-  margin-left: 65px;
+  margin-left: 75px;
   color: #fff;
   border: solid #666666;
   border-width: 0 2px 2px 0;
@@ -209,4 +209,18 @@
   border: 1px solid #fff;
   font-weight: 700;
   background: #F1F1F1;
+}
+@media only screen and (max-width: 767px) {
+  .content-bootstrap-feel {
+    width: 255px;
+    height: 470px;
+  }
+  .picker-wrapper {
+    flex-direction: column;
+    gap: 0px;
+  }
+  .next-arrow {
+    margin-top: -355px;
+    margin-left: 85px;
+  }
 }
