@@ -46,11 +46,13 @@
       </div>
       <div class='flex-child'>
         <div class='year-title'>
-          <span class='next-year'>{{this.currentYear}}</span>
-          <span
-            class='next-arrow'
-            onclick={{action 'nextYearSelection'}}
-          ></span>
+          <span class='next-year'>{{this.nextYear}}</span>
+          {{#if this.renderRightArrow}}
+            <span
+              class='next-arrow'
+              onclick={{action 'nextYearSelection'}}
+            ></span>
+          {{/if}}
         </div>
         <div class='year-cal'>
           {{#each this.months as |calendar|}}
@@ -58,13 +60,13 @@
               class='month-card
                 {{month-range
                   calendar
-                  this.currentYear
+                  this.nextYear
                   this.startMonth
                   this.endMonth
                   this.startYear
                   this.endYear
                 }}'
-              onclick={{action 'onSelectHandler' calendar this.currentYear}}
+              onclick={{action 'onSelectHandler' calendar this.nextYear}}
             >{{calendar}}</div>
           {{/each}}
         </div>

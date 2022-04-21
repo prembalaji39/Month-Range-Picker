@@ -13,8 +13,13 @@ export default Component.extend({
   startYear: undefined,
   endYear: undefined,
   currentYear: new Date().getUTCFullYear(),
-  previousYear: new Date().getUTCFullYear() - 1,
   currentMonth: new Date().toLocaleString('default', { month: 'short' }),
+  nextYear: new Date().getUTCFullYear(),
+  previousYear: new Date().getUTCFullYear() - 1,
+  nextMonth: new Date().toLocaleString('default', { month: 'short' }),
+  renderRightArrow: computed('currentYear', 'nextYear', function () {
+    return this.get('currentYear') !== this.get('nextYear');
+  }),
   isDateSelected: false,
   selectedStartMonth: undefined,
   selectedStartYear: undefined,
@@ -26,7 +31,7 @@ export default Component.extend({
       months: computed('months'),
     },
     {
-      year: computed('currentYear'),
+      year: computed('nextYear'),
       months: computed('months'),
     },
   ],
@@ -80,13 +85,13 @@ export default Component.extend({
     },
     previousYearSelection() {
       this.set('previousYear', this.previousYear - 1);
-      this.set('currentYear', this.currentYear - 1);
+      this.set('nextYear', this.nextYear - 1);
     },
     nextYearSelection() {
       var latestYear = moment().format('YYYY');
-      if (this.currentYear < latestYear) {
+      if (this.nextYear < latestYear) {
         this.set('previousYear', this.previousYear + 1);
-        this.set('currentYear', this.currentYear + 1);
+        this.set('nextYear', this.nextYear + 1);
       }
     },
     monthCancelation(dropdown) {
