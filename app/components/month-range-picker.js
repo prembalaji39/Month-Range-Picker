@@ -18,7 +18,7 @@ export default Component.extend({
   previousYear: new Date().getUTCFullYear() - 1,
   nextMonth: new Date().toLocaleString('default', { month: 'short' }),
   renderRightArrow: computed('currentYear', 'nextYear', function () {
-    return this.get('currentYear') !== this.get('nextYear');
+    return this.currentYear !== this.nextYear;
   }),
   isDateSelected: false,
   selectedStartMonth: undefined,
@@ -52,8 +52,10 @@ export default Component.extend({
 
   actions: {
     onSelectHandler(month, year) {
-      const monthDifference = moment(new Date(`${month} ${year}`)).diff(
-        new Date(`${this.startMonth} ${this.startYear}`),
+      let monthIndex = this.months.indexOf(month);
+      let startmonthIndex = this.months.indexOf(this.startMonth);
+      const monthDifference = moment(new Date(year, monthIndex)).diff(
+        new Date(this.startYear, startmonthIndex),
         'months',
         true
       );
