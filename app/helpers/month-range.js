@@ -11,14 +11,13 @@ export default helper(function monthChecker([
 ]) {
   var classes = '';
   var today = new Date();
-  let previousMonth = moment(new Date(`${startMonth} ${startYear}`)).subtract(
-    1,
-    'months'
-  );
+  let previousMonth = moment(
+    new Date(`${startYear},${startMonth},01`)
+  ).subtract(1, 'months');
   previousMonth = new Date(previousMonth);
 
-  const monthDifference = moment(new Date(`${endMonth} ${endYear}`)).diff(
-    new Date(`${startMonth} ${startYear}`),
+  const monthDifference = moment(new Date(`${endYear},${endMonth},01`)).diff(
+    new Date(`${startYear},${startMonth},01`),
     'months',
     true
   );
@@ -27,18 +26,18 @@ export default helper(function monthChecker([
     classes += ' selected-month';
   }
 
-  if (previousMonth.getTime() === new Date(`${month}${year}`).getTime()) {
+  if (previousMonth.getTime() === new Date(`${year},${month},01`).getTime()) {
     classes += ' offset-month';
   }
   const offsetStartMonth = moment(
-    new Date(`${startMonth} ${startYear}`)
+    new Date(`${startYear},${startMonth},01`)
   ).subtract(monthDifference + 1, 'months');
 
   if (startMonth === month && startYear === year) {
     classes += ' selected-month';
   }
 
-  if (new Date(`${month} ${year}`) > today) {
+  if (new Date(`${year},${month},01`) > today) {
     classes += 'future-months';
   }
 
@@ -53,17 +52,18 @@ export default helper(function monthChecker([
     classes += '';
 
     if (
-      new Date(`${startMonth} ${startYear}`) < new Date(`${month} ${year}`) &&
-      new Date(`${endMonth} ${endYear}`) > new Date(`${month} ${year}`)
+      new Date(`${startYear},${startMonth},01`) <
+        new Date(`${year},${month},01`) &&
+      new Date(`${endYear},${endMonth},01`) > new Date(`${year},${month},01`)
     ) {
       classes += ' in-between-month';
     }
 
     if (
       new Date(offsetStartMonth).getTime() <=
-        new Date(`${month} ${year}`).getTime() &&
-      new Date(`${month} ${year}`).getTime() <
-        new Date(`${startMonth} ${startYear}`).getTime()
+        new Date(`${year},${month},01`).getTime() &&
+      new Date(`${year},${month},01`).getTime() <
+        new Date(`${startYear},${startMonth},01`).getTime()
     ) {
       classes += ' offset-month';
     }

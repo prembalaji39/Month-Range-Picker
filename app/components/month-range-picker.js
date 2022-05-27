@@ -52,8 +52,8 @@ export default Component.extend({
 
   actions: {
     onSelectHandler(month, year) {
-      const monthDifference = moment(new Date(`${month} ${year}`)).diff(
-        new Date(`${this.startMonth} ${this.startYear}`),
+      const monthDifference = moment(new Date(`${year},${month},01`)).diff(
+        new Date(`${this.startYear},${this.startMonth},01`),
         'months',
         true
       );
